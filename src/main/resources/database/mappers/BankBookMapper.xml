@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.pbw.main.bankbook.BankBookDAO">
+  	<select id="getDetail" resultType="com.pbw.main.bankbook.BankBookDTO" parameterType="com.pbw.main.bankbook.BankBookDTO">  <!-- 이 태그를 사용하려고 하는 클래스의 메서드명으로 ID작성 -->
+  		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  </mapper>

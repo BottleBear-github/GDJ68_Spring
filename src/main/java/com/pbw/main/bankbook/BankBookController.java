@@ -15,12 +15,13 @@ public class BankBookController {
 	@RequestMapping(value="list", method = RequestMethod.GET) //       "/bankbook/" 밑에 list.do
 	public String getList()throws Exception{
 		System.out.println("list");
-		bankBookService.service();
 		return "bankbook/list";
 	}
 	@RequestMapping(value="detail")  //method = RequestMethod.GET을 안쓰면 기본적으로 GET
-	public String getDetail()throws Exception{
-		System.out.println("Detail");
+	public String getDetail(BankBookDTO bankBookDTO)throws Exception{
+		bankBookDTO=bankBookService.getDetail(bankBookDTO);
+		System.out.println(bankBookDTO.getBookNum());
+		System.out.println(bankBookDTO.getBookName());
 		return "bankbook/detail";
 	}
 	
