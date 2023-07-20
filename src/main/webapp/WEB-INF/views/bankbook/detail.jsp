@@ -31,8 +31,8 @@
 		</c:otherwise>
 	</c:choose>
 	
-	<a href="./update.do?bookNum=${dto.bookNum}">수정</a>
-	<a href="./delete.do?bookNum=${dto.bookNum}">삭제</a>
+	<a href="./update?bookNum=${dto.bookNum}">수정</a>
+	<a href="./delete?bookNum=${dto.bookNum}">삭제</a>
 <%-- 
 	<c:if test="${dto.bookSale eq 1}">
 		<h1>판매중</h1>

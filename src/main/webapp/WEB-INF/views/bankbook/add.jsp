@@ -16,7 +16,7 @@
 	<section>
 		<h1>Add Page</h1>
 		
-		<form action="./add.do" method="post">
+		<form action="./add" method="post">
 			<div class="mb-3">
 				<label for="exampleInputEmail1" class="form-label">상품명</label>
 				<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="bookName"><br> <!-- 파라미터의 이름은 세터의 이름(set을 빼고 첫글자소문자) -->
