@@ -8,6 +8,9 @@
   		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
   	</select>
   	
+  	<select id="getList" resultType="com.pbw.main.bankbook.BankBookDTO">
+  		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM BANKBOOK ORDER BY BOOKNUM DESC
+  	</select>
   	
   	
   	

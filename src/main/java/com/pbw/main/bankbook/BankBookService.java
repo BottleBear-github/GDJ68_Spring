@@ -1,5 +1,7 @@
 package com.pbw.main.bankbook;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,9 @@ public class BankBookService {
 	
 	public BankBookDTO getDetail(BankBookDTO bankBookDTO)throws Exception {
 		return bankBookDAO.getDetail(bankBookDTO);
-
+	}
+	
+	public List<BankBookDTO> getList() throws Exception{
+		return bankBookDAO.getList();
 	}
 }
