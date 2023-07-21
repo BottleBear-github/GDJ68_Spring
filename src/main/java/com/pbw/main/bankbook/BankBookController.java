@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/bankbook/*") //하나만 적을땐 value 안 써도 됨
+@RequestMapping("/bankbook/*") //하나만 적을땐 value 안 써도 됨, 전체가 /bankbook/*로 세팅
 public class BankBookController {
 
 	@Autowired
@@ -33,24 +33,41 @@ public class BankBookController {
 		return mv;
 	}
 	
-	
-	
-	@RequestMapping(value="add")
-	public String getAdd() throws Exception{
+	//form
+	@RequestMapping(value="add", method = RequestMethod.GET)
+	public void setAdd() throws Exception{
 		System.out.println("add");
-		return "bankbook/add";
 	}
 	
-	@RequestMapping(value="update")
-	public String getUpdate() throws Exception{
-		System.out.println("update");
-		return "bankbook/update";
+	//db insert
+	@RequestMapping(value="add", method = RequestMethod.POST)
+	public String setAdd(BankBookDTO bankBookDTO) throws Exception{
+		System.out.println("addpost");
+		int result = bankBookService.setAdd(bankBookDTO);
+		return "redirect:/bankbook/list";
 	}
 	
 	@RequestMapping(value="delete")
-	public String delete() throws Exception{
+	public String delete(BankBookDTO bankBookDTO) throws Exception{
 		System.out.println("delete");
-		return "Index";
+		int result = bankBookService.setDelete(bankBookDTO);
+//		return "redirect:./list";
+		return "redirect:./detail?bookNum="+bankBookDTO.getBookNum();
+	}
+	
+	@RequestMapping(value="update", method = RequestMethod.GET)
+	public void setUpdate(BankBookDTO bankBookDTO, Model model) throws Exception{
+		System.out.println("update");
+		bankBookDTO=bankBookService.getDetail(bankBookDTO);
+		model.addAttribute("dto", bankBookDTO);
+		
+	}
+	
+	@RequestMapping(value="update", method = RequestMethod.POST)
+	public String setUpdate(BankBookDTO bankBookDTO) throws Exception{
+		System.out.println("updatepost");
+		int result = bankBookService.setUpdate(bankBookDTO);
+		return "redirect:./list";
 	}
 	
 }

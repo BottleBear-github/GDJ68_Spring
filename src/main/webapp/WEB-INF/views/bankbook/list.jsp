@@ -28,7 +28,7 @@
 				<!-- ArrayList에는 BankBookDTO타입이 들어있기 때문에 -->
 					<tr>
 						<td><a href="./detail?bookNum=${d.bookNum}">${d.bookName}</a></td>
-						<td>${d.bookRate} ${i.index}</td>
+						<td>${d.bookRate}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

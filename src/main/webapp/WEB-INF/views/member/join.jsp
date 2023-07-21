@@ -13,7 +13,7 @@
 	
 	<section class="container mt-5">
 		<h1 class="mb-3">Join Page</h1>
-		<form class="col-md-4 ms-auto" method="post" action="./join.do">
+		<form class="col-md-4 ms-auto" method="post" action="./join">
 		
 			<div class="row g-3 align-items-center">
 			  <div class="col-auto">

@@ -12,11 +12,30 @@
   		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM BANKBOOK ORDER BY BOOKNUM DESC
   	</select>
   	
+  	<insert id="setAdd" parameterType="com.pbw.main.bankbook.BankBookDTO"> <!-- CRUD는 result타입이 없음 결과가 정수로옴 1,0 -->
+  		INSERT INTO BANKBOOK VALUES (BANK_SEQ.NEXTVAL, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
+  	</insert>
   	
+  	<delete id="setDelete" parameterType="com.pbw.main.bankbook.BankBookDTO">
+  		DELETE BANKBOOK WHERE BOOKNUM=#{bookNum}
+  	</delete>
+  	<!-- 
+  	<delete id="setDelete" parameterType="java.lang.Long">
+  		DELETE BANKBOOK WHERE BOOKNUM=#{num}
+  	</delete>
+  	 -->
   	
-  	
-  	
-  	
+  	<update id="setUpdate" parameterType="com.pbw.main.bankbook.BankBookDTO">
+  		UPDATE 
+  			BANKBOOK 
+  		SET 
+  			BOOKNAME=#{bookName},
+  			BOOKRATE=#{bookRate},
+  			BOOKSALE=#{bookSale},
+  			BOOKCONTENTS=#{bookContents}
+  		WHERE
+  			BOOKNUM=#{bookNum}
+  	</update>
   	
   	
   </mapper>
