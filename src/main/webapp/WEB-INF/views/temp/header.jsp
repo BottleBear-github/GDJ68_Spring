@@ -35,7 +35,7 @@
 		      
 			<nav>
 			   <ul class="nav">
-		    		<c:if test="${sessionScope.member ne null}">
+		    		<c:if test="${not empty member}">
 			      		<li class="nav-item me-3"><a href="/member/logout">로그아웃</a></li>
 			      		<li class="nav-item me-3"><a href="/member/mypage">마이페이지</a></li>
 					</c:if>

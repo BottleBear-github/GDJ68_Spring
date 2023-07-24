@@ -6,5 +6,6 @@
  <configuration>
  	<typeAliases>
  		<typeAlias type="com.pbw.main.bankbook.BankBookDTO" alias="BankBookDTO"/>
+ 		<typeAlias type="com.pbw.main.member.MemberDTO" alias="MemberDTO"/>
  	</typeAliases>
  </configuration>

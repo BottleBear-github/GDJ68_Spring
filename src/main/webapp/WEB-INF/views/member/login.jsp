@@ -14,19 +14,19 @@
 	<c:import url="../temp/header.jsp"></c:import>
 	<section class="container mt-5">
 		<h1 class="mb-3">Login Page</h1>
-		<form class="col-md-4 ms-auto" method="post" action="./login.do">
+		<form class="col-md-4 ms-auto" method="post" action="./login">
 		
 			<div class="row g-3 align-items-center">
 			  <div class="col-auto">
 			    <label for="id" class="col-form-label">ID</label>
-			    <input type="text" name="id" id="id" class="form-control" placeholder="ID를 입력하세요">
+			    <input type="text" name="id" id="id" value="id1" class="form-control" placeholder="ID를 입력하세요">
 			  </div>
 			</div>
 		
 			<div class="row g-3 align-items-center">
 			  <div class="col-auto">
 			    <label for="pw" class="col-form-label">Password</label>
-			    <input type="password" name="pw" id="pw" class="form-control" aria-labelledby="passwordHelpInline" placeholder="PW를 입력하세요">
+			    <input type="password" name="pw" id="pw" value="pw1" class="form-control" aria-labelledby="passwordHelpInline" placeholder="PW를 입력하세요">
 			  </div>
 			</div>
 		

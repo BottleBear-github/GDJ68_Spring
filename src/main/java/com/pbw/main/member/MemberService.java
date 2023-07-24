@@ -9,8 +9,11 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	public void service() {
-		System.out.println("MemberService");
-		memberDAO.dao();
+	public MemberDTO getLogin(MemberDTO memberDTO)throws Exception{
+		return memberDAO.getLogin(memberDTO);
+	}
+	
+	public int setMemberUpdate(MemberDTO memberDTO)throws Exception{
+		return memberDAO.setMemberUpdate(memberDTO);
 	}
 }

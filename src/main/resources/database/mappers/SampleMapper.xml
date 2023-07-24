@@ -9,3 +9,5 @@
   	<delete id="c"></delete>
   	<select id="d"></select>
   </mapper>
+  
+  
