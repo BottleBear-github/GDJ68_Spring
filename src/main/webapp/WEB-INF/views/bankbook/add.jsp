@@ -13,17 +13,25 @@
 
 	<c:import url="../temp/header.jsp"></c:import>
 
-	<section>
-		<h1>Add Page</h1>
+	<section class="container mt-5">
+		<h1 class="mb-3">Add Page</h1>
 		
-		<form action="./add" method="post">
-			<div class="mb-3">
-				<label for="exampleInputEmail1" class="form-label">상품명</label>
-				<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="bookName"><br> <!-- 파라미터의 이름은 세터의 이름(set을 빼고 첫글자소문자) -->
-				상세설명<textarea rows="" cols="" name="bookContents"></textarea>
-				이자율<input type="text" name="bookRate"><br>
+		<form class="col-md-4 ms-auto" action="./add" method="post">
+			<div class="row g-3 align-items-center">
+				<label for="bookName" class="col-form-label">상품명</label>
+				<input type="text" class="form-control" id="bookName"  name="bookName" placeholder="상품명을 입력하세요"><br> <!-- 파라미터의 이름은 세터의 이름(set을 빼고 첫글자소문자) -->
 			</div>
 			
+			<div class="row g-3 align-items-center">
+				<label for="bookContents" class="col-form-label">상세설명</label>
+				<input type="text" class="form-control" id="bookContents"  name="bookContents" placeholder="상세설명을 입력하세요"><br> <!-- 파라미터의 이름은 세터의 이름(set을 빼고 첫글자소문자) -->
+			</div>
+			
+			<div class="row g-3 align-items-center">
+				<label for="bookRate" class="col-form-label">이자율</label>
+				<input type="text" class="form-control" id="bookRate"  name="bookRate" placeholder="이자율을 입력하세요"><br> <!-- 파라미터의 이름은 세터의 이름(set을 빼고 첫글자소문자) -->
+			</div>
+		
 			
 			<p>
 				판매가능<input type="radio" value="1" checked name ="bookSale"><br>
@@ -39,10 +47,8 @@
 	-->
 			</p>
 			
-			<button type="submit" class="btn btn-primary">등록</button>
-			<input type="submit" value="ADD">
-			<input type="reset" value="RESRT">
-			<input type="button" value="BUTTON">
+			<button type="submit" class="btn btn-success mt-5 me-3">상품등록</button>
+			<button type="reset" class="btn btn-success mt-5">다시입력</button>
 			
 			
 		</form>

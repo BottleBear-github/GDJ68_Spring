@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.pbw.main.bankbook.BankBookDAO">
+  	<select id="getDetail" resultType="BankBookDTO" parameterType="BankBookDTO">  <!-- 이 태그를 사용하려고 하는 클래스의 메서드명으로 ID작성 -->
+  		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
+  	</select>
+  	
+  	<select id="getList" resultType="BankBookDTO">
+  		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM BANKBOOK ORDER BY BOOKNUM DESC
+  	</select>
+  	
+  	<insert id="setAdd" parameterType="BankBookDTO"> <!-- CRUD는 result타입이 없음 결과가 정수로옴 1,0 -->
+  		INSERT INTO BANKBOOK VALUES (BANK_SEQ.NEXTVAL, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
+  	</insert>
+  	
+  	<delete id="setDelete" parameterType="BankBookDTO">
+  		DELETE BANKBOOK WHERE BOOKNUM=#{bookNum}
+  	</delete>
+  	<!-- 
+  	<delete id="setDelete" parameterType="java.lang.Long">
+  		DELETE BANKBOOK WHERE BOOKNUM=#{num}
+  	</delete>
+  	 -->
+  	
+  	<update id="setUpdate" parameterType="BankBookDTO">
+  		UPDATE 
+  			BANKBOOK 
+  		SET 
+  			BOOKNAME=#{bookName},
+  			BOOKRATE=#{bookRate},
+  			BOOKSALE=#{bookSale},
+  			BOOKCONTENTS=#{bookContents}
+  		WHERE
+  			BOOKNUM=#{bookNum}
+  	</update>
+  	
+  	
+  </mapper>

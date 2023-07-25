@@ -14,33 +14,30 @@
 	<c:import url="../temp/header.jsp"></c:import>
 	
 	<section class="container mt-5">
-		<h1 class="mb-3 text-center">BankBook List</h1>
+		<h1 class="mb-3 text-center">Notice List</h1>
 		
 		<table class="table table-success table-sm">
 		<!-- Latest compiled and minified CSS -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 			<thead>
-				<th>상품명</th><th>이자율</th>
+				<th>NO</th><th>SUBJECT</th><th>NAME</th><th>DATE</th><th>HIT</th>
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.list}" var="d" varStatus="i"> 
-				<!-- 스코프명은 생략가능/items의 ArrayList에서 꺼내서 d에 넣어줌 d는 BankBookDTO타입-->
-				<!-- ArrayList에는 BankBookDTO타입이 들어있기 때문에 -->
 					<tr>
-						<td><a href="./detail?bookNum=${d.bookNum}">${d.bookName}</a></td>
-						<td>${d.bookRate}</td>
+						<td><a href="./detail?noticeNo=${d.noticeNo}">${d.noticeNo}</a></td>
+						<td><a href="./detail?noticeNo=${d.noticeNo}">${d.noticeSubject}</a></td>
+						<td>${d.noticeName}</td>
+						<td>${d.noticeDate}</td>
+						<td>${d.noticeHit}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		
-		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./add">상품등록</a>
+		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./add">글쓰기</a>
 		
-		<%-- 
-		<c:forEach begin="1" end="10" step="2" var="num">
-			<h1>${num}</h1>
-		</c:forEach>
-		 --%>
+	
 	</section>
 		
 		

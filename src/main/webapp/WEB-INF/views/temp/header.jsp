@@ -17,6 +17,9 @@
 		        <li class="nav-item">
 		          <a class="nav-link active" href="/bankbook/list">금융상품</a>
 		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link active" href="/notice/list">NOTICE</a>
+		        </li>
 		        <li class="nav-item dropdown">
 		          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		            Dropdown
@@ -35,7 +38,7 @@
 		      
 			<nav>
 			   <ul class="nav">
-		    		<c:if test="${sessionScope.member ne null}">
+		    		<c:if test="${not empty member}">
 			      		<li class="nav-item me-3"><a href="/member/logout">로그아웃</a></li>
 			      		<li class="nav-item me-3"><a href="/member/mypage">마이페이지</a></li>
 					</c:if>

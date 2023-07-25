@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Update Page</h1>
-	<form action="./update.do" method="post">
+	<form action="./update" method="post">
 		<input type="text" readonly="readonly" name="bookNum" value="${dto.bookNum}">
 		상품명<input type="text" name="bookName" value="${dto.bookName}"><br> <!-- 파라미터의 이름은 세터의 이름(set을 빼고 첫글자소문자) -->
 		상세설명<textarea rows="" cols="" name="bookContents">${dto.bookContents}</textarea>
@@ -22,9 +22,8 @@
 
 		
 		<button type="submit">수정</button>
-		<input type="submit" value="수정">
-		<input type="reset" value="수정">
-		<input type="button" value="수정">
+		<button type="reset">다시입력</button>
+		
 		
 		
 	</form>
