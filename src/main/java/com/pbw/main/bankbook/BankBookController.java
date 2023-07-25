@@ -52,7 +52,7 @@ public class BankBookController {
 		System.out.println("delete");
 		int result = bankBookService.setDelete(bankBookDTO);
 //		return "redirect:./list";
-		return "redirect:./detail?bookNum="+bankBookDTO.getBookNum();
+		return "redirect:/bankbook/list";
 	}
 	
 	@RequestMapping(value="update", method = RequestMethod.GET)

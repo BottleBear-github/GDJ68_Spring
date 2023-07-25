@@ -12,12 +12,12 @@ import com.pbw.main.bankbook.BankBookDTO;
 
 public class BankBookDAOTest extends Mytest {
 
-	private SqlSession sqlSession;
-	
-	private final String NAMESPACE="com.pbw.main.bankbook.BankBookDAO.";
-	
-	public List<BankBookDTO> getList() throws Exception {
-		return sqlSession.selectList(NAMESPACE+"getList");
-	}
+//	private SqlSession sqlSession;
+//	
+//	private final String NAMESPACE="com.pbw.main.bankbook.BankBookDAO.";
+//	
+//	public List<BankBookDTO> getList() throws Exception {
+//		return sqlSession.selectList(NAMESPACE+"getList");
+//	}
 
 }
