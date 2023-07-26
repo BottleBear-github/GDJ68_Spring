@@ -2,7 +2,9 @@ package com.pbw.main.bankBook;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -18,20 +20,33 @@ public class BankBookDAOTest extends Mytest {
 	private BankBookDAO bankBookDAO;
 	
 	@Test
-	public void addTest() throws Exception {
-		BankBookDTO bankBookDTO = new BankBookDTO();
+	public void getListTest()throws Exception{
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("startRow", 1);
+		map.put("lastRow", 10);
 		
-		for(int i=0; i<30; i++) {
-			
-			bankBookDTO.setBookName("청년병웅통장"+i);
-			bankBookDTO.setBookContents("입출금 내용 및 내역"+i);
-			bankBookDTO.setBookRate(8.7);
-			bankBookDTO.setBookSale(1);
-			bankBookDAO.setAdd(bankBookDTO);
-		}
-		
-		System.out.println("Finish");
+//		List<BankBookDTO> ar = bankBookDAO.getList(map);
+//		System.out.println(ar.get(0).getBookNum());
+//		System.out.println(ar.get(9).getBookNum());
 		
 	}
+	
+	
+//	@Test
+//	public void addTest() throws Exception {
+//		BankBookDTO bankBookDTO = new BankBookDTO();
+//		
+//		for(int i=0; i<30; i++) {
+//			
+//			bankBookDTO.setBookName("청년병웅통장"+i);
+//			bankBookDTO.setBookContents("입출금 내용 및 내역"+i);
+//			bankBookDTO.setBookRate(8.7);
+//			bankBookDTO.setBookSale(1);
+//			bankBookDAO.setAdd(bankBookDTO);
+//		}
+//		
+//		System.out.println("Finish");
+//		
+//	}
 
 }

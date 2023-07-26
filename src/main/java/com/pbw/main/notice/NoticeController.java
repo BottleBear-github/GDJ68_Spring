@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pbw.main.util.Pager;
+
 
 
 @Controller
@@ -19,9 +21,10 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@RequestMapping(value="list")
-	public String getNoList(Model model)throws Exception{
-		List<NoticeDTO> ar = noticeService.getList();
+	public String getNoList(Model model, Pager pager)throws Exception{
+		List<NoticeDTO> ar = noticeService.getList(pager);
 		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
 		return "board/list";
 	}
 	

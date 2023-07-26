@@ -19,4 +19,21 @@ public class NoticeDAOTest extends Mytest {
 //		List<NoticeDTO> ar = noticeDAO.getList();
 //		assertNotEquals(0, ar.size());
 //	}
+	
+	@Test
+	public void addTest() throws Exception {
+		NoticeDTO noticeDTO = new NoticeDTO();
+		
+		for(int i=0; i<100; i++) {
+			
+			noticeDTO.setNoticeSubject("NoticeSubject"+i);
+			noticeDTO.setNoticeName("NoticeName"+i);
+			noticeDTO.setNoticeContents("NoticeContents"+i);
+			noticeDAO.setAdd(noticeDTO);
+		}
+		
+		System.out.println("Finish");
+		
+	}
+	
 }

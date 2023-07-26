@@ -7,7 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pbw.main.util.Pager;
 
 @Controller
 @RequestMapping("/bankbook/*") //하나만 적을땐 value 안 써도 됨, 전체가 /bankbook/*로 세팅
@@ -16,10 +19,12 @@ public class BankBookController {
 	@Autowired
 	private BankBookService bankBookService;
 	
+	
 	@RequestMapping(value="list", method = RequestMethod.GET) //       "/bankbook/" 밑에 list.do 이제는 do뺌
-	public String getList(Model model)throws Exception{
-		List<BankBookDTO> ar=bankBookService.getList();
+	public String getList(Model model, Pager pager)throws Exception{
+		List<BankBookDTO> ar=bankBookService.getList(pager);
 		model.addAttribute("list", ar); //반목문 돌려서 하나씩 꺼내는 작업을 이걸로 함
+		model.addAttribute("pager", pager);
 		return "bankbook/list";
 	}
 	
