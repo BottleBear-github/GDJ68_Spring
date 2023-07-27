@@ -4,6 +4,21 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.pbw.main.bankbook.BankBookDAO">
+  	
+  	<sql id="searchSql">
+  		WHERE BOOKNUM>0 
+					
+		<choose>
+			<when test="kind=='name'">
+				AND BOOKNAME LIKE '%'||#{search}||'%'
+			</when>
+			<otherwise>
+				AND BOOKCONTENTS LIKE '%'||#{search}||'%'
+			</otherwise>
+		</choose>
+		 
+  	</sql>
+  	
   	<select id="getDetail" resultType="BankBookDTO" parameterType="BankBookDTO">  <!-- 이 태그를 사용하려고 하는 클래스의 메서드명으로 ID작성 -->
   		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
   	</select>
@@ -23,8 +38,8 @@
 					* 
 				FROM 
 					BANKBOOK 
-				WHERE 
-					BOOKNUM>0 
+				<include refid="searchSql" />
+				
 				ORDER BY 
 					BOOKNUM DESC
 				) B
@@ -33,8 +48,9 @@
 			R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
-  	<select id="getTotal" resultType="Long">
+  	<select id="getTotal" resultType="Long" parameterType="com.pbw.main.util.Pager">
   		SELECT COUNT(BOOKNUM) FROM BANKBOOK
+  		<include refid="searchSql"></include>
   	</select>
   	
   	<insert id="setAdd" parameterType="BankBookDTO"> <!-- CRUD는 result타입이 없음 결과가 정수로옴 1,0 -->

@@ -12,6 +12,10 @@
 <body>
 	
 	<c:import url="../temp/header.jsp"></c:import>
+	
+		
+	
+	
 	<section class="container mt-5">
 		<h1 class="mb-3">Login Page</h1>
 		<form class="col-md-4 ms-auto" method="post" action="./login">

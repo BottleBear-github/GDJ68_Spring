@@ -28,11 +28,11 @@ public class BankBookService {
 //		int count=10;
 //		int startRow=(page-1)*count+1;
 //		int lastRow=page*count;
-		
+
 		pager.makeRowNum();
-		Long total=bankBookDAO.getTotal();
+		Long total=bankBookDAO.getTotal(pager);
+		System.out.println(total);
 		pager.makePageNum(total);
-		
 //		map.put("startRow", startRow);
 //		map.put("lastRow", lastRow);
 		

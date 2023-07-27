@@ -21,7 +21,9 @@ public class Pager {
 	//다음블럭활성화를 담는 변수
 	private boolean next;  //false면 마지막 블럭, true면 마지막블럭은 아님(활성화)
 	
-
+	//검색
+	private String kind;
+	private String search;
 
 
 	public void makeRowNum() {
@@ -75,7 +77,7 @@ public class Pager {
 		if(!this.next) {
 			this.lastNum=totalPage;
 		}
-	
+		
 	}
 	
 	
@@ -155,6 +157,26 @@ public class Pager {
 
 	public void setNext(boolean next) {
 		this.next = next;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getSearch() {
+		if(this.search == null) {
+			this.search="";
+		}
+		return search;
+	}
+
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 	
 

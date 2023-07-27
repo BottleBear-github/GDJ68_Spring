@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberDAO {
+	
 	@Autowired
 	private SqlSession sqlSession;
+	
 	private final String NAMESPACE="com.pbw.main.member.MemberDAO.";
 	
 	public MemberDTO getLogin(MemberDTO memberDTO)throws Exception{
@@ -16,6 +18,10 @@ public class MemberDAO {
 	
 	public int setMemberUpdate(MemberDTO memberDTO)throws Exception{
 		return sqlSession.update(NAMESPACE+"setMemberUpdate", memberDTO);
+	}
+	
+	public int setJoin(MemberDTO memberDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
 	}
 	
 }

@@ -13,7 +13,7 @@
 	
 	<section class="container mt-5">
 		<h1 class="mb-3">Join Page</h1>
-		<form class="col-md-4 ms-auto" method="post" action="./join">
+		<form class="col-md-4 ms-auto" method="post" action="./join" enctype="multipart/form-data">
 		
 			<div class="row g-3 align-items-center">
 			  <div class="col-auto">
@@ -50,6 +50,13 @@
 			  <div class="col-auto">
 			    <label for="birth" class="col-form-label">생년월일</label>
 			    <input type="date" name="birth" id="birth" class="form-control" >
+			  </div>
+			</div>
+			
+			<div class="row g-3 align-items-center">
+			  <div class="col-auto">
+			    <label for="pic" class="col-form-label">사진첨부</label>
+			    <input type="file" name="pic" id="pic" class="form-control" >
 			  </div>
 			</div>
 		

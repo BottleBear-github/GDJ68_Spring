@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/member/*")
@@ -32,9 +33,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping("join")
-	public String getJoin() throws Exception{
+	public String setJoin() throws Exception{
 		System.out.println("Join");
 		return "member/join";
+	}
+	
+	@RequestMapping(value = "join", method=RequestMethod.POST)
+	public String setJoin(MemberDTO memberDTO, MultipartFile pic, HttpSession session) throws Exception{
+		int result = memberService.setJoin(memberDTO, pic, session);
+//		System.out.println(pic.getName());
+		return "redirect:../";
 	}
 	
 	@RequestMapping("mypage")
