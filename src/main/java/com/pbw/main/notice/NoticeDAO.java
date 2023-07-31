@@ -18,8 +18,8 @@ public class NoticeDAO {
 	private final String NAMESPACE="com.pbw.main.notice.NoticeDAO.";
 	
 	//total
-	public Long getTotal()throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotal");
+	public Long getTotal(Pager pager)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
 	}
 	
 	//List
@@ -47,5 +47,9 @@ public class NoticeDAO {
 	
 	public int setHitCount(NoticeDTO noticeDTO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setHitCount", noticeDTO);
+	}
+	
+	public int setFileAdd(NoticeFileDTO noticeFileDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setFileAdd", noticeFileDTO);
 	}
 }

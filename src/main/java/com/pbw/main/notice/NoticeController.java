@@ -2,11 +2,14 @@ package com.pbw.main.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pbw.main.util.Pager;
@@ -36,9 +39,9 @@ public class NoticeController {
 		
 	//db insert
 	@RequestMapping(value="add", method = RequestMethod.POST)
-	public String setAdd(NoticeDTO noticeDTO) throws Exception{
+	public String setAdd(NoticeDTO noticeDTO,  MultipartFile [] photos, HttpSession session) throws Exception{
 		System.out.println("addpost");
-		int result = noticeService.setAdd(noticeDTO);
+		int result = noticeService.setAdd(noticeDTO, photos, session);
 		return "redirect:./list";
 	}
 	
