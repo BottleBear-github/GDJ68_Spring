@@ -46,11 +46,10 @@
   	
   	<select id="getList" resultType="BankBookDTO" parameterType="com.pbw.main.util.Pager">
   		SELECT 
-  			QNANUM, 
-  			QNANAME, 
-  			QNASUBJECT, 
-  			QNADATE,
-  			QNAHIT 
+  			BOOKNUM, 
+  			BOOKNAME, 
+  			BOOKRATE, 
+  			BOOKSALE 
 		FROM(
 			SELECT 
 				ROWNUM R, 
