@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.pbw.main.qnaBoard.QNADAO">
+  	
+  	<select id="getTotal" resultType="Long" parameterType="com.pbw.main.util.Pager">
+  		SELECT 
+  			COUNT(QNANUM)
+  		FROM
+  			QNABOARD
+  		<include refid="searchSql"></include>
+  	</select>
+  	
+  	<sql id="searchSql">
+  		WHERE 
+  			QNANUM>0 
+					
+		<choose>
+			<when test="kind=='name'">
+				AND QNANAME LIKE '%'||#{search}||'%'
+			</when>
+			<otherwise>
+				AND QNACONTENTS LIKE '%'||#{search}||'%'
+			</otherwise>
+		</choose>
+		 
+  	</sql>
+  	
+	<select id="getList" resultType="com.pbw.main.qnaBoard.QNADTO" parameterType="com.pbw.main.util.Pager">
+  		SELECT 
+  			*
+		FROM(
+			SELECT 
+				ROWNUM R, 
+				B.* 
+			FROM(
+				SELECT
+					* 
+				FROM 
+					QNABOARD
+				<include refid="searchSql" />
+				
+				ORDER BY 
+					QNANUM DESC
+				) B
+			)
+		WHERE
+			R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  </mapper>
+  
+  

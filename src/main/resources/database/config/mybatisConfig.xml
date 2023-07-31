@@ -12,5 +12,6 @@
  		<typeAlias type="java.lang.Long" alias="Long"/>
  		<typeAlias type="com.pbw.main.member.MemberFileDTO" alias="MemberFileDTO"/>
  		<typeAlias type="java.util.List" alias="List"/>
+ 		<typeAlias type="com.pbw.main.qnaBoard.QNADTO" alias="QNADTO"/>
  	</typeAliases>
  </configuration>
