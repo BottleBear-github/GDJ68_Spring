@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.pbw.main.member.MemberFileDTO;
+import com.pbw.main.util.FileManager;
 import com.pbw.main.util.Pager;
 
 @Service
@@ -14,6 +19,8 @@ public class BankBookService {
 
 	@Autowired
 	private BankBookDAO bankBookDAO;
+	@Autowired
+	private FileManager fileManager;
 	
 	public BankBookDTO getDetail(BankBookDTO bankBookDTO)throws Exception {
 		return bankBookDAO.getDetail(bankBookDTO);
@@ -39,8 +46,30 @@ public class BankBookService {
 		return bankBookDAO.getList(pager);
 	}
 	
-	public int setAdd(BankBookDTO bankBookDTO)throws Exception {
-		return bankBookDAO.setAdd(bankBookDTO);
+	public int setAdd(BankBookDTO bankBookDTO, MultipartFile [] files, HttpSession session)throws Exception {
+		String path="/resources/upload/bankbook/";
+		
+//		long num = bankBookDAO.getSequence();
+//		bankBookDTO.setBookNum(num);
+		
+		int result = bankBookDAO.setAdd(bankBookDTO);
+		
+		for(MultipartFile multipartFile: files) {
+			
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(path, session, multipartFile);
+				
+			BankBookFileDTO bankBookFileDTO = new BankBookFileDTO();
+			bankBookFileDTO.setOriginalName(multipartFile.getOriginalFilename());
+			bankBookFileDTO.setFileName(fileName);
+			bankBookFileDTO.setBookNum(bankBookDTO.getBookNum());
+			result = bankBookDAO.setFileAdd(bankBookFileDTO);
+		}
+
+		return result; //bankBookDAO.setAdd(bankBookDTO);
 	}
 	
 	public int setDelete(BankBookDTO bankBookDTO)throws Exception {

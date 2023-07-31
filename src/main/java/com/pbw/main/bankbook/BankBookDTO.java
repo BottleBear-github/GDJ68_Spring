@@ -1,5 +1,7 @@
 package com.pbw.main.bankbook;
 
+import java.util.List;
+
 public class BankBookDTO {
 	
 	private Long bookNum;
@@ -7,6 +9,8 @@ public class BankBookDTO {
 	private String bookContents;
 	private Double bookRate;
 	private Integer bookSale;
+	private List<BankBookFileDTO> fileDTOs;
+	
 	
 	public Long getBookNum() {
 		return bookNum;
@@ -38,6 +42,14 @@ public class BankBookDTO {
 	public void setBookSale(Integer bookSale) {
 		this.bookSale = bookSale;
 	}
+	public List<BankBookFileDTO> getFileDTOs() {
+		return fileDTOs;
+	}
+	public void setFileDTOs(List<BankBookFileDTO> fileDTOs) {
+		this.fileDTOs = fileDTOs;
+	}
+
+	
 	
 	
 

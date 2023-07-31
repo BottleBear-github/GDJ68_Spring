@@ -36,6 +36,14 @@ public class BankBookDAO {
 		return sqlSession.selectOne(NAMESPACE+"getDetail", bankBookDTO);
 	}
 	
+//	public long getSequence()throws Exception{
+//		return sqlSession.selectOne(NAMESPACE+"getSequence");
+//	}
+	
+	public int setFileAdd(BankBookFileDTO bankBookFileDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"setFileAdd", bankBookFileDTO);
+	}
+	
 	//add
 	public int setAdd(BankBookDTO bankBookDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setAdd", bankBookDTO);  //어느 mapper의 어느 ip를 가져올지

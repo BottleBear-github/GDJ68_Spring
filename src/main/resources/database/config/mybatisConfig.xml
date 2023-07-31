@@ -6,8 +6,11 @@
  <configuration>
  	<typeAliases>
  		<typeAlias type="com.pbw.main.bankbook.BankBookDTO" alias="BankBookDTO"/>
+ 		<typeAlias type="com.pbw.main.bankbook.BankBookFileDTO" alias="BankBookFileDTO"/>
  		<typeAlias type="com.pbw.main.member.MemberDTO" alias="MemberDTO"/>
  		<typeAlias type="com.pbw.main.notice.NoticeDTO" alias="NoticeDTO"/>
  		<typeAlias type="java.lang.Long" alias="Long"/>
+ 		<typeAlias type="com.pbw.main.member.MemberFileDTO" alias="MemberFileDTO"/>
+ 		<typeAlias type="java.util.List" alias="List"/>
  	</typeAliases>
  </configuration>

@@ -16,7 +16,7 @@
 	<section class="container mt-5">
 		<h1 class="mb-3">Add Page</h1>
 		
-		<form class="col-md-4 ms-auto" action="./add" method="post">
+		<form class="col-md-4 ms-auto" action="./add" method="post" enctype="multipart/form-data">
 			<div class="row g-3 align-items-center">
 				<label for="bookName" class="col-form-label">상품명</label>
 				<input type="text" class="form-control" id="bookName"  name="bookName" placeholder="상품명을 입력하세요"><br> <!-- 파라미터의 이름은 세터의 이름(set을 빼고 첫글자소문자) -->
@@ -46,6 +46,19 @@
 				</select>
 	-->
 			</p>
+			
+			<div class="row g-3 align-items-center col-auto">
+			    <label for="pic" class="col-form-label">사진첨부</label>
+			    <input type="file" name="photos" id="pic" class="form-control" >
+			</div>
+			<div class="row g-3 align-items-center col-auto">
+			    <label for="pic" class="col-form-label">사진첨부</label>
+			    <input type="file" name="photos" id="pic" class="form-control" >
+			</div>
+			<div class="row g-3 align-items-center col-auto">
+			    <label for="pic" class="col-form-label">사진첨부</label>
+			    <input type="file" name="photos" id="pic" class="form-control" >
+			</div>
 			
 			<button type="submit" class="btn btn-success mt-5 me-3">상품등록</button>
 			<button type="reset" class="btn btn-success mt-5">다시입력</button>

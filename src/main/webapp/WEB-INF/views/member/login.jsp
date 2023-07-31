@@ -30,7 +30,7 @@
 			<div class="row g-3 align-items-center">
 			  <div class="col-auto">
 			    <label for="pw" class="col-form-label">Password</label>
-			    <input type="password" name="pw" id="pw" value="pw1" class="form-control" aria-labelledby="passwordHelpInline" placeholder="PW를 입력하세요">
+			    <input type="password" name="pw" id="pw" value="13" class="form-control" aria-labelledby="passwordHelpInline" placeholder="PW를 입력하세요">
 			  </div>
 			</div>
 		

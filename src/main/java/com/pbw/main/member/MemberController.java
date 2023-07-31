@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pbw.main.util.FileManager;
+
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
@@ -34,13 +36,13 @@ public class MemberController {
 	
 	@RequestMapping("join")
 	public String setJoin() throws Exception{
-		System.out.println("Join");
+		System.out.println("GetJoin");
 		return "member/join";
 	}
 	
 	@RequestMapping(value = "join", method=RequestMethod.POST)
 	public String setJoin(MemberDTO memberDTO, MultipartFile pic, HttpSession session) throws Exception{
-		int result = memberService.setJoin(memberDTO, pic, session);
+		int result = memberService.setJoin(memberDTO, session, pic);
 //		System.out.println(pic.getName());
 		return "redirect:../";
 	}
@@ -74,6 +76,13 @@ public class MemberController {
 		}
 		return "redirect:./mypage";
 		
+	}
+	
+	@RequestMapping("memberDelete")
+	public String setMemberDelete(MemberDTO memberDTO)throws Exception {
+		System.out.println("memberdelete");
+		int result = memberService.setMemberDelete(memberDTO);
+		return "redirect:/Index";
 	}
 	
 }

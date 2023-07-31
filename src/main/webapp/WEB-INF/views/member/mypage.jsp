@@ -15,6 +15,9 @@
 		
 		<div>
 			<p>
+				<img alt="" src="../resources/upload/member/${member.memberFileDTO.fileName}">
+			</p>
+			<p>
 				${member.id} : ${sessionScope.member.name}
 			</p>
 			<p>
@@ -26,7 +29,7 @@
 		</div>
 
 		<a class=btn-primary href="./memberUpdate">회원수정</a>
-	
+		<a class=btn-primary href="./memberDelete">회원탈퇴</a>
 	</section>
 
 </body>

@@ -12,6 +12,10 @@ public class MemberDAO {
 	
 	private final String NAMESPACE="com.pbw.main.member.MemberDAO.";
 	
+	public int setFileJoin(MemberFileDTO memberFileDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setFileJoin", memberFileDTO);
+	}
+	
 	public MemberDTO getLogin(MemberDTO memberDTO)throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getLogin", memberDTO);
 	}
@@ -24,4 +28,7 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
 	}
 	
+	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
+		return sqlSession.delete(NAMESPACE+"setMemberDelete", memberDTO);
+	}
 }
