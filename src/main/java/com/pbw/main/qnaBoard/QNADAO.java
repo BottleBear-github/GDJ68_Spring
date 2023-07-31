@@ -26,4 +26,8 @@ public class QNADAO {
 		return sqlSession.selectList(NAMESPACE+"getList", pager);
 	}
 
+	//add
+	public int setAdd(QNADTO qnaDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setAdd", qnaDTO);  
+	}
 }

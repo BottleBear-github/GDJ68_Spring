@@ -49,6 +49,28 @@
 		WHERE
 			R BETWEEN #{startRow} AND #{lastRow}
   	</select>
+  	
+  	<insert id="setAdd" parameterType="QNADTO"> 
+  		<selectKey keyProperty="qnaNum" resultType="Long" order="BEFORE">
+  			SELECT QNABOARD_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT 
+  		INTO 
+  			QNABOARD 
+		VALUES 
+			(
+				#{qnaNum}, 
+				#{qnaName},
+				#{qnaSubject},
+				#{qnaContents},
+				SYSDATE, 
+				0, 
+				0, 
+				0, 
+				0
+			)
+  	</insert>
+  	
   </mapper>
   
   

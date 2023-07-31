@@ -19,4 +19,8 @@ public class QNAService {
 		pager.makePageNum(total);
 		return qnaDAO.getList(pager);
 	}
+	
+	public int setAdd(QNADTO qnaDTO)throws Exception{
+		return qnaDAO.setAdd(qnaDTO);
+	}
 }
