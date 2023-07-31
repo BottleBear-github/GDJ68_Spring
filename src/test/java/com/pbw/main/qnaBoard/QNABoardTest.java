@@ -8,12 +8,14 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pbw.main.Mytest;
-import com.pbw.main.notice.NoticeDTO;
+import com.pbw.main.board.notice.NoticeDTO;
+import com.pbw.main.board.qna.QnaDAO;
+import com.pbw.main.board.qna.QnaDTO;
 
 public class QNABoardTest extends Mytest {
 
 	@Autowired
-	private QNADAO qnaDAO;
+	private QnaDAO qnaDAO;
 	
 //	@Test
 //	public void getListTest() throws Exception{
@@ -23,7 +25,7 @@ public class QNABoardTest extends Mytest {
 	
 	@Test
 	public void addTest()throws Exception{
-		QNADTO qnadto = new QNADTO();
+		QnaDTO qnadto = new QnaDTO();
 		
 		for(int i=0; i<100; i++) {
 			qnadto.setQnaContents("contesnts"+i);

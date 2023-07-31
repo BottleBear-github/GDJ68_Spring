@@ -5,14 +5,14 @@
 
  <configuration>
  	<typeAliases>
+ 		<typeAlias type="java.lang.Long" alias="Long"/>
+ 		<typeAlias type="java.util.List" alias="List"/>
  		<typeAlias type="com.pbw.main.bankbook.BankBookDTO" alias="BankBookDTO"/>
  		<typeAlias type="com.pbw.main.bankbook.BankBookFileDTO" alias="BankBookFileDTO"/>
  		<typeAlias type="com.pbw.main.member.MemberDTO" alias="MemberDTO"/>
  		<typeAlias type="com.pbw.main.member.MemberFileDTO" alias="MemberFileDTO"/>
- 		<typeAlias type="com.pbw.main.notice.NoticeDTO" alias="NoticeDTO"/>
- 		<typeAlias type="com.pbw.main.notice.NoticeFileDTO" alias="NoticeFileDTO"/>
- 		<typeAlias type="java.lang.Long" alias="Long"/>
- 		<typeAlias type="java.util.List" alias="List"/>
- 		<typeAlias type="com.pbw.main.qnaBoard.QNADTO" alias="QNADTO"/>
+ 		<typeAlias type="com.pbw.main.board.notice.NoticeDTO" alias="NoticeDTO"/>
+ 		<typeAlias type="com.pbw.main.board.notice.NoticeFileDTO" alias="NoticeFileDTO"/>
+ 		<typeAlias type="com.pbw.main.board.qna.QnaDTO" alias="QnaDTO"/>
  	</typeAliases>
  </configuration>

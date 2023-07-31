@@ -1,4 +1,4 @@
-package com.pbw.main.notice;
+package com.pbw.main.board.notice;
 
 import com.pbw.main.file.FileDTO;
 

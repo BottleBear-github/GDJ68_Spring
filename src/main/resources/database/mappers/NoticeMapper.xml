@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.pbw.main.notice.NoticeDAO">
+  <mapper namespace="com.pbw.main.board.notice.NoticeDAO">
   
   	<select id="getTotal" resultType="Long" parameterType="com.pbw.main.util.Pager">
   		SELECT COUNT(NOTICENO) FROM NOTICE
@@ -82,12 +82,12 @@
   	</select>
   	
   		<resultMap type="NoticeDTO" id="getDetailResult">
-  			<id column="NOTICENO" property="noticeNo"/>
-  			<result column="NOTICENAME" property="noticeName"/>
-  			<result column="NOTICESUBJECT" property="noticeSubject"/>
-  			<result column="NOTICEDATE" property="noticeDate"/>
-  			<result column="NOTICEHIT" property="noticeHit"/>
-  			<result column="NOTICECONTENTS" property="noticeContents"/>
+  			<id column="NOTICENO" property="num"/>
+  			<result column="NOTICENAME" property="name"/>
+  			<result column="NOTICESUBJECT" property="subject"/>
+  			<result column="NOTICEDATE" property="createDate"/>
+  			<result column="NOTICEHIT" property="hit"/>
+  			<result column="NOTICECONTENTS" property="contents"/>
   			
   			<collection property="fileDTOs" javaType="java.util.List" ofType="NoticeFileDTO">
   				<id column="FILENUM" property="fileNum"/>

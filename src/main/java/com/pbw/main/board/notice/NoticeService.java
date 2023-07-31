@@ -1,4 +1,4 @@
-package com.pbw.main.notice;
+package com.pbw.main.board.notice;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class NoticeService {
 			NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
 			noticeFileDTO.setOriginalName(multipartFile.getOriginalFilename());
 			noticeFileDTO.setFileName(fileName);
-			noticeFileDTO.setNoticeNo(noticeDTO.getNoticeNo());
+			noticeFileDTO.setNoticeNo(noticeDTO.getNum());
 			result = noticeDAO.setFileAdd(noticeFileDTO);
 			
 		}

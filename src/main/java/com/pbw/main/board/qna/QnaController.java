@@ -1,4 +1,4 @@
-package com.pbw.main.qnaBoard;
+package com.pbw.main.board.qna;
 
 import java.util.List;
 
@@ -12,14 +12,14 @@ import com.pbw.main.util.Pager;
 
 @Controller
 @RequestMapping("/qnaBoard/*")
-public class QNAController {
+public class QnaController {
 	
 	@Autowired
-	private QNAService qnaService;
+	private QnaService qnaService;
 	
 	@RequestMapping("list")
 	public String getList(Model model, Pager pager)throws Exception{
-		List<QNADTO> ar = qnaService.getList(pager);
+		List<QnaDTO> ar = qnaService.getList(pager);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		return "qnaBoard/list";
@@ -31,7 +31,7 @@ public class QNAController {
 	}
 	
 	@RequestMapping(value="add", method = RequestMethod.POST)
-	public String setAdd(QNADTO qnaDTO)throws Exception{
+	public String setAdd(QnaDTO qnaDTO)throws Exception{
 		System.out.println("add POST");
 		int result = qnaService.setAdd(qnaDTO);
 		return "redirect:./list";
