@@ -28,9 +28,9 @@ public class QNABoardTest extends Mytest {
 		QnaDTO qnadto = new QnaDTO();
 		
 		for(int i=0; i<100; i++) {
-			qnadto.setQnaContents("contesnts"+i);
-			qnadto.setQnaName("name"+i);
-			qnadto.setQnaSubject("subject"+i);
+			qnadto.setContents("contesnts"+i);
+			qnadto.setName("name"+i);
+			qnadto.setSubject("subject"+i);
 			qnaDAO.setAdd(qnadto);
 		}
 	}

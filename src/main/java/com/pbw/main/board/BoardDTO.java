@@ -10,6 +10,7 @@ public class BoardDTO {
 	private String contents;
 	private Date createDate;
 	private Long hit;
+	
 	public Long getNum() {
 		return num;
 	}

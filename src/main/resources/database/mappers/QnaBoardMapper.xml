@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.pbw.main.board.qna.QnaDAO">
+  	
+  	<select id="getTotal" resultType="Long" parameterType="com.pbw.main.util.Pager">
+  		SELECT 
+  			COUNT(QNANUM)
+  		FROM
+  			QNABOARD
+  		<include refid="searchSql"></include>
+  	</select>
+  	
+  	<sql id="searchSql">
+  		WHERE 
+  			QNANUM>0 
+					
+		<choose>
+			<when test="kind=='name'">
+				AND QNANAME LIKE '%'||#{search}||'%'
+			</when>
+			<otherwise>
+				AND QNACONTENTS LIKE '%'||#{search}||'%'
+			</otherwise>
+		</choose>
+		 
+  	</sql>
+  	
+	<select id="getList" resultMap="getDetailResult" parameterType="com.pbw.main.util.Pager">
+  		SELECT 
+  			*
+		FROM(
+			SELECT 
+				ROWNUM R, 
+				B.* 
+			FROM(
+				SELECT
+					* 
+				FROM 
+					QNABOARD
+				<include refid="searchSql" />
+				
+				ORDER BY 
+					REF DESC, STEP ASC
+				) B
+			)
+		WHERE
+			R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+   	<resultMap type="QnaDTO" id="getDetailResult">
+  		<id column="QNANUM" property="num"/>
+  		<result column="QNANAME" property="name"/>
+  		<result column="QNASUBJECT" property="subject"/>
+  		<result column="QNADATE" property="createDate"/>
+  		<result column="QNAHIT" property="hit"/>
+  		<result column="QNACONTENTS" property="contents"/>
+  		<result column="REF" property="ref"/>
+  		<result column="STEP" property="step"/>
+  		<result column="DEPTH" property="depth"/>
+			
+  		<collection property="fileDTOs" javaType="java.util.List" ofType="QnaFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORIGINALNAME" property="originalName"/>
+  			
+  		</collection>
+
+  	</resultMap>
+  	
+  	<insert id="setReplyAdd" parameterType="QnaDTO"> 
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT QNABOARD_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT 
+  		INTO 
+  			QNABOARD
+  				(
+  				QNANUM, QNANAME, QNASUBJECT, QNACONTENTS, QNADATE, QNAHIT, REF, STEP, DEPTH
+  				)
+		VALUES 
+			(
+			#{num}, #{name}, #{subject}, #{contents}, SYSDATE, 0, #{ref}, #{step}, #{depth}
+			)
+  	</insert>
+  	
+  	<update id="setStepUpdate" parameterType="QnaDTO">
+  		 UPDATE 
+		 	QNABOARD
+		 SET
+		 	STEP = STEP+1
+		 WHERE
+		 	REF = #{ref} AND STEP>#{step}
+  	</update>
+  	
+  	
+  	<insert id="setAdd" parameterType="BoardDTO"> 
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT QNABOARD_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT 
+  		INTO 
+  			QNABOARD
+  				(
+  				QNANUM, QNANAME, QNASUBJECT, QNACONTENTS, QNADATE, QNAHIT, REF, STEP, DEPTH
+  				)
+		VALUES 
+			(
+				#{num}, 
+				#{name},
+				#{subject},
+				#{contents},
+				SYSDATE, 
+				0, 
+				#{num}, 
+				0, 
+				0
+			)
+  	</insert>
+  	
+  	<select id="getDetail" resultMap="getDetailResult" parameterType="QnaDTO">  
+  		SELECT 
+  			Q.*,
+  			QF.* 
+  		FROM
+  			QNABOARD Q LEFT OUTER JOIN
+  			QNAFILE QF ON Q.QNANUM = QF.QNANUM
+  		WHERE
+  			Q.QNANUM=#{num}
+  	</select>
+  	
+  	<update id="setHitCount" >
+		UPDATE
+			QNABOARD
+		SET
+			QNAHIT = QNAHIT + 1
+		WHERE
+			QNANUM = #{num}
+	</update>
+	
+	<delete id="setDelete" parameterType="QnaDTO">
+		DELETE
+		FROM
+			QNABOARD
+		WHERE
+			QNANUM=#{num}
+	</delete>
+  	
+  	<update id="setUpdate" parameterType="QnaDTO">
+  		UPDATE 
+  			QNABOARD
+  		SET 
+  			QNASUBJECT=#{subject},
+  			QNACONTENTS=#{contents}
+  		WHERE
+  			QNANUM=#{num}
+  	</update>
+  	
+  	<insert id="setFileAdd" parameterType="QnaFileDTO" > 
+  		INSERT INTO QNAFILE (FILENUM, QNANUM, FILENAME, ORIGINALNAME)
+		VALUES (BANK_SEQ.NEXTVAL, #{qnaNum}, #{fileName}, #{originalName})
+  	</insert>
+  	
+  </mapper>
+  
+  

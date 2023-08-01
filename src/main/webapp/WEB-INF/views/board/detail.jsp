@@ -14,9 +14,8 @@
 	<section class="container mt-5">
 		<h1 class="mb-3 text-center">Detail Page</h1>
 		<form>
-				<h1>Subject : ${requestScope.dto.noticeSubject}</h1>
+				<h1>Subject : ${requestScope.dto.subject}</h1>
 			<table class="table table-success table-sm">
-			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">	
 				<thead>
 					<tr>
 						<td>번호</td><td>제목</td><td>이름</td><td>날짜</td><td>조회수</td>
@@ -24,11 +23,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>${requestScope.dto.noticeNo}</td>
-						<td>${requestScope.dto.noticeSubject}</td>
-						<td>${requestScope.dto.noticeName}</td>
-						<td>${requestScope.dto.noticeDate}</td>
-						<td>${requestScope.dto.noticeHit}</td>
+						<td>${requestScope.dto.num}</td>
+						<td>${requestScope.dto.subject}</td>
+						<td>${requestScope.dto.name}</td>
+						<td>${requestScope.dto.createDate}</td>
+						<td>${requestScope.dto.hit}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -37,14 +36,22 @@
 					<td>내용</td>
 				</tr>
 				<tr>
-					<td>${requestScope.dto.noticeContents}</td>
+					<td>${requestScope.dto.contents}</td>
 				</tr>
 			</table>
 		</form>
 		
+		<c:forEach items="${dto.fileDTOs}" var="f">
+					<img alt="" src="../resources/upload/${board}/${f.fileName}">
+		</c:forEach>
+		
 		<form>
-			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./update?noticeNo=${dto.noticeNo}">수정</a>
-			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./delete?noticeNo=${dto.noticeNo}">삭제</a>
+			<c:if test="${board ne 'notice'}">
+			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./reply?num=${dto.num}">답글</a>
+			</c:if>
+			
+			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./update?num=${dto.num}">수정</a>
+			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./delete?num=${dto.num}">삭제</a>
 		</form>
 </section>
 

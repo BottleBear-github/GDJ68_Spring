@@ -19,17 +19,17 @@
 		<form class="col-md-4 ms-auto" action="./add" method="post">
 			<div class="row g-3 align-items-center">
 				<label for="qnaSubject" class="col-form-label">제목</label>
-				<input type="text" class="form-control" id="qnaSubject"  name="qnaSubject" placeholder="제목을 입력하세요"><br>
+				<input type="text" class="form-control" id="qnaSubject"  name="subject" placeholder="제목을 입력하세요"><br>
 			</div>
 			
 			<div class="row g-3 align-items-center">
 				<label for="qnaName" class="col-form-label mt-5">작성자</label>
-				<input type="text" class="form-control" id="qnaName"  name="qnaName" placeholder="작성자를 입력하세요"><br> 
+				<input type="text" class="form-control" id="qnaName"  name="name" placeholder="작성자를 입력하세요"><br> 
 			</div>
 			
 			<div class="row g-3 align-items-center">
 				<label for="qnaContents" class="col-form-label mt-5">내용</label>
-				<input type="textarea" class="form-control" id="qnaContents"  name="qnaContents" placeholder="내용을 입력하세요"><br> 
+				<input type="textarea" class="form-control" id="qnaContents"  name="contents" placeholder="내용을 입력하세요"><br> 
 			</div>
 			
 		

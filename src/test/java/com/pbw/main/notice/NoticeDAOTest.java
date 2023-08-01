@@ -28,9 +28,9 @@ public class NoticeDAOTest extends Mytest {
 		
 		for(int i=0; i<100; i++) {
 			
-			noticeDTO.setNoticeSubject("NoticeSubject"+i);
-			noticeDTO.setNoticeName("NoticeName"+i);
-			noticeDTO.setNoticeContents("NoticeContents"+i);
+			noticeDTO.setSubject("NoticeSubject"+i);
+			noticeDTO.setName("NoticeName"+i);
+			noticeDTO.setContents("NoticeContents"+i);
 			noticeDAO.setAdd(noticeDTO);
 		}
 		

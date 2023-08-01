@@ -25,11 +25,11 @@
 			<tbody>
 				<c:forEach items="${requestScope.list}" var="d" varStatus="i"> 
 					<tr>
-						<td>${d.qnaNum}</td>
-						<td>${d.qnaSubject}</td>
-						<td>${d.qnaName}</td>
-						<td>${d.qnaDate}</td>
-						<td>${d.qnaHit}</td>
+						<td>${d.num}</td>
+						<td>${d.subject}</td>
+						<td>${d.name}</td>
+						<td>${d.createDate}</td>
+						<td>${d.hit}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

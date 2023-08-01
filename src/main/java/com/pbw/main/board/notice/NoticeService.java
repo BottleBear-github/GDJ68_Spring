@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pbw.main.board.BoardDTO;
+import com.pbw.main.board.BoardService;
 import com.pbw.main.util.FileManager;
 import com.pbw.main.util.Pager;
 
 
-
-
 @Service
-public class NoticeService {
+public class NoticeService implements BoardService{
 
 	@Autowired
 	private NoticeDAO noticeDAO;
@@ -23,16 +23,18 @@ public class NoticeService {
 	@Autowired
 	private FileManager fileManager;
 	
-	public List<NoticeDTO> getList(Pager pager) throws Exception{
+	@Override
+	public List<BoardDTO> getList(Pager pager) throws Exception{
 		pager.makeRowNum();
 		Long total=noticeDAO.getTotal(pager);
 		pager.makePageNum(total);
 		return noticeDAO.getList(pager);
 	}
 	
-	public int setAdd(NoticeDTO noticeDTO, MultipartFile [] files, HttpSession session)throws Exception {
+	@Override
+	public int setAdd(BoardDTO boardDTO, MultipartFile [] files, HttpSession session)throws Exception {
 		String path="/resources/upload/notice/";
-		int result = noticeDAO.setAdd(noticeDTO);
+		int result = noticeDAO.setAdd(boardDTO);
 		
 		for(MultipartFile multipartFile: files) {
 			
@@ -44,7 +46,7 @@ public class NoticeService {
 			NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
 			noticeFileDTO.setOriginalName(multipartFile.getOriginalFilename());
 			noticeFileDTO.setFileName(fileName);
-			noticeFileDTO.setNoticeNo(noticeDTO.getNum());
+			noticeFileDTO.setNoticeNo(boardDTO.getNum());
 			result = noticeDAO.setFileAdd(noticeFileDTO);
 			
 		}
@@ -53,16 +55,19 @@ public class NoticeService {
 		return result; //noticeDAO.setAdd(noticeDTO);
 	}
 	
-	public NoticeDTO getDetail(NoticeDTO noticeDTO)throws Exception {
-		return noticeDAO.getDetail(noticeDTO);
+	@Override
+	public BoardDTO getDetail(BoardDTO boardDTO)throws Exception {
+		return noticeDAO.getDetail(boardDTO);
 	}
 	
-	public int setDelete(NoticeDTO noticeDTO)throws Exception {
-		return noticeDAO.setDelete(noticeDTO);
+	@Override
+	public int setDelete(BoardDTO boardDTO)throws Exception {
+		return noticeDAO.setDelete(boardDTO);
 	}
 	
-	public int setUpdate(NoticeDTO noticeDTO)throws Exception{
-		return noticeDAO.setUpdate(noticeDTO);
+	@Override
+	public int setUpdate(BoardDTO boardDTO)throws Exception{
+		return noticeDAO.setUpdate(boardDTO);
 	}
 	
 	public int setHitCount(NoticeDTO noticeDTO)throws Exception{
