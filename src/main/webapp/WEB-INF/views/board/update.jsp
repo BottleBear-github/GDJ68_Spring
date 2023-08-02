@@ -38,23 +38,13 @@
 				  <textarea name="contents" class="form-control" id="contents" <%-- value="${dto.contents}" --%> rows="7"></textarea>
 				</div>
 				
-				<div id="fileList" class="my-5">
-					<div class="input-group mb-3">
+				<c:forEach items="${dto.fileDTOs}" var="f">
+					<div id="fileList" class="my-5 input-group mb-3">
+						
 						<input type="file" class="form-control" id="photos" name="photos">
+
 					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>					
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>					
-				</div>
+				</c:forEach>
 							
 				<div class="mb-3">
 					<button class="my btn btn-danger" type="submit">수정</button>
