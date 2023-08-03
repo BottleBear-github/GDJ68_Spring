@@ -19,7 +19,7 @@ import com.pbw.main.util.Pager;
 
 
 @Controller
-@RequestMapping("/notice/**")
+@RequestMapping("/notice/*")
 public class NoticeController {
 	
 	@Autowired
@@ -31,7 +31,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="list")
-	public String getNoList(Model model, Pager pager)throws Exception{
+	public String getList(Model model, Pager pager)throws Exception{
 		List<BoardDTO> ar = noticeService.getList(pager);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
@@ -41,29 +41,44 @@ public class NoticeController {
 	//form
 	@RequestMapping(value="add", method = RequestMethod.GET)
 	public String setAdd() throws Exception{
+		
 		return "board/add";
 	}
 		
 	//db insert
-	@RequestMapping(value="add", method = RequestMethod.POST)
-	public String setAdd(NoticeDTO noticeDTO,  MultipartFile [] photos, HttpSession session) throws Exception{
-		System.out.println("addpost");
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String setAdd(NoticeDTO noticeDTO, MultipartFile[] photos, HttpSession session, Model model)throws Exception{
 		int result = noticeService.setAdd(noticeDTO, photos, session);
-		return "redirect:./list";
+		
+		String message="등록 실패";
+		
+		if(result>0) {
+			message="등록 성공";
+		}
+		
+		model.addAttribute("message", message);
+		model.addAttribute("url", "list");
+		
+		return "commons/result";
 	}
 	
 	//detail
-	@RequestMapping(value="detail") 
-	public ModelAndView getDetail(NoticeDTO noticeDTO, ModelAndView mv)throws Exception{
-		int result = noticeService.setHitCount(noticeDTO);
-		BoardDTO boardDTO=noticeService.getDetail(noticeDTO);
-		mv.addObject("dto", boardDTO);
-		mv.setViewName("board/detail");
-		return mv;
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	public String setAdd(NoticeDTO noticeDTO, Model model)throws Exception{
+		BoardDTO boardDTO = noticeService.getDetail(noticeDTO);
+		if(boardDTO != null) {
+			model.addAttribute("dto", boardDTO);
+			return "board/detail";
+		}else {
+			model.addAttribute("message", "글이 없다");
+			model.addAttribute("url", "list");
+			return "commons/result";
+		}
+		
 	}
 	
 	//delete
-	@RequestMapping(value="delete")
+	@RequestMapping(value="delete", method = RequestMethod.POST)
 	public String delete(NoticeDTO noticeDTO) throws Exception{
 		System.out.println("delete");
 		int result = noticeService.setDelete(noticeDTO);
