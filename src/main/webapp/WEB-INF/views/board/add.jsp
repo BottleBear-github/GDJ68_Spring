@@ -39,25 +39,16 @@
 				</div>
 				
 				<div id="fileList" class="my-5">
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>					
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>					
-	
+					<!-- <div class="input-group mb-3">
+						<input type="file" class="form-control" id="photos" name="photos">			
+					</div> -->
 				</div>
-							
-				<div class="mb-3">
+				
+				<div class="input-group mb-3">
+					<button type="button" id="add">File추가</button>
+				</div>
+
+				<div class="mb-3" >
 					<button class="my btn btn-danger" type="submit" id="btn">글쓰기</button>
 				</div>
 			
@@ -65,6 +56,7 @@
 		</div>
 	</div>
 
+	<script src="../resources/js/file.js"></script>
 	<script>
 		const btn = document.getElementById("btn");
 		const subject = document.getElementById("subject");

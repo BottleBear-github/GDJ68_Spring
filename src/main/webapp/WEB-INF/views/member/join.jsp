@@ -23,7 +23,7 @@
 	
 	<section class="container mt-5">
 		<h1 class="mb-3">Join Page</h1>
-		<form class="col-md-4 ms-auto" method="post" action="./join" enctype="multipart/form-data">
+		<form class="col-md-4 ms-auto" id="frm" method="post" action="./join" enctype="multipart/form-data">
 		
 			<div class="row g-3 align-items-center">
 			  <div class="col-auto">
@@ -75,6 +75,7 @@
 			  <div class="col-auto">
 			    <label for="birth" class="col-form-label">생년월일</label>
 			    <input type="date" name="birth" id="birth" class="form-control" >
+				<div id="birthResult" class="output"></div>
 			  </div>
 			</div>
 			
@@ -87,6 +88,7 @@
 		
 			<button type="submit" class="btn btn-success mt-5 me-3">회원가입</button>
 			<button type="reset" class="btn btn-success mt-5">다시입력</button>
+			<button type="button" id="btn" class="btn btn-success mt-5 me-3">회원가입2</button>
 		</form>
 	</section>
 	
