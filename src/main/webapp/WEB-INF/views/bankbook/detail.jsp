@@ -46,7 +46,8 @@
 				<a href="./delete?bookNum=${dto.bookNum}">삭제</a>
 				<button id="update">수정</button>
 				<button id="del" data-delete-name="bookNum" data-delete-num="${dto.bookNum}">삭제</button>
-
+				<a class="btn btn-primary" href="../bookAccount/add?bookNum=${dto.bookNum}">상품가입</a>
+				
 				<script src="../resources/js/delete.js"></script>
 				<!-- <script>
 					setBookNum(${dto.bookNum});
@@ -55,6 +56,14 @@
 
 </table>
 </section>
+
+	<script type="text/javascript">
+		const add = document.getElementById("add");
+		add.addEventListener("click", function(){
+			let bookNum='${dto.bookNum}';
+		});
+
+	</script>
 
 </body>
 </html>

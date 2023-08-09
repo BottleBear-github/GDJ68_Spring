@@ -103,6 +103,6 @@
 		 --%>
 	</section>
 		
-
+	<script type="text/javascript" src="/resources/js/bookList.js"></script>
 </body>
 </html>
