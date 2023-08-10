@@ -13,54 +13,63 @@ import com.pbw.main.util.Pager;
 
 
 @Repository
-public class NoticeDAO implements BoardDAO{
+public class NoticeDAO implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
+	private final String NAMESPACE="com.iu.main.board.notice.NoticeDAO.";
 	
-	private final String NAMESPACE="com.pbw.main.board.notice.NoticeDAO.";
-	
-	//total
-	@Override
-	public Long getTotal(Pager pager)throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
+	public NoticeFileDTO getFileDetail(NoticeFileDTO noticeFileDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getFileDetail", noticeFileDTO);
 	}
 	
-	//List
+	public int setFileDelete(NoticeFileDTO noticeFileDTO)throws Exception{
+		return sqlSession.delete(NAMESPACE+"setFileDelete", noticeFileDTO);
+	}
+	
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
+		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAMESPACE+"getList", pager);
 	}
-	//add
+
 	@Override
-	public int setAdd(BoardDTO boardDTO)throws Exception{
-		return sqlSession.insert(NAMESPACE+"setAdd", boardDTO);
-	}
-	//detail
-	@Override
-	public NoticeDTO getDetail(BoardDTO boardDTO) throws Exception{
+	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NAMESPACE+"getDetail", boardDTO);
 	}
-	
-	//delete
+
 	@Override
-	public int setDelete(BoardDTO boardDTO) throws Exception{
+	public int setAdd(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE+"setAdd", boardDTO);
+	}
+
+	@Override
+	public int setUpdate(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
+	}
+
+	@Override
+	public int setDelete(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
 		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
 	}
 
-	//update
 	@Override
-	public int setUpdate(BoardDTO boardDTO) throws Exception{
-		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
+	public Long getTotal(Pager pager) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
 	}
-	
+
 	@Override
-	public int setHitCount(BoardDTO boardDTO) throws Exception{
-		return sqlSession.update(NAMESPACE+"setHitCount", boardDTO);
+	public int setHitUpdate(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	public int setFileAdd(NoticeFileDTO noticeFileDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setFileAdd", noticeFileDTO);
 	}
-	
 
 }

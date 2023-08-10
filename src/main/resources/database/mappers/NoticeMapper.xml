@@ -3,107 +3,96 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.pbw.main.board.notice.NoticeDAO">
-  
-  	<select id="getTotal" resultType="Long" parameterType="com.pbw.main.util.Pager">
-  		SELECT COUNT(NOTICENO) FROM NOTICE
-  		<include refid="searchSql"></include>
-  	</select>
-  
-  	<sql id="searchSql">
-  		WHERE NOTICENO>0 
-					
-		<choose>
-			<when test="kind=='name'">
-				AND NOTICENAME LIKE '%'||#{search}||'%'
-			</when>
-			<otherwise>
-				AND NOTICECONTENTS LIKE '%'||#{search}||'%'
-			</otherwise>
-		</choose>
-		 
-  	</sql>
-  
-  	<select id="getList" resultMap="getDetailResult" parameterType="com.pbw.main.util.Pager">
+  <mapper namespace="com.iu.main.board.notice.NoticeDAO">
+      	<sql id="searchSql">
+	  		WHERE NOTICENO>0 
+							
+			<choose>
+				<when test="kind=='subject'">
+					AND NOTICESUBJECT LIKE '%'||#{search}||'%'
+				</when>
+				
+				<when test="kind=='contents'">
+					AND NOTICECONTENTS LIKE '%'||#{search}||'%'
+				</when>
+				
+				<otherwise>
+					AND NOTICENAME LIKE '%'||#{search}||'%'	
+				</otherwise>
+			</choose>
+  		</sql>
+	<select id="getList" resultMap="getSelectResult" parameterType="Pager">
   		SELECT 
-  			NOTICENO,
-  			NOTICESUBJECT,
-  			NOTICENAME,
-  			NOTICEDATE,
-  			NOTICEHIT
+  			*
 		FROM(
 			SELECT 
 				ROWNUM R, 
-				N.* 
+				B.* 
 			FROM(
 				SELECT
 					* 
 				FROM 
-					NOTICE 
-				<include refid="searchSql" />
+					NOTICE
+				<include refid="searchSql"></include>	
 				
 				ORDER BY 
 					NOTICENO DESC
-				) N
+				) B
 			)
 		WHERE
 			R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
   	
-  	<select id="getSequence">
-  		SELETE NOTICE_SEQ.NEXTVAL FROM DUAL
+  	
+  	<resultMap type="NoticeDTO" id="getSelectResult">
+  		<id column="NOTICENO" property="num"/>
+  		<result column="NOTICESUBJECT" property="subject"/>
+  		<result column="NOTICENAME" property="name"/>
+  		<result column="NOTICECONTENTS" property="contents"/>
+  		<result column="NOTICEDATE" property="createDate"/>
+  		<result column="NOTICEHIT" property="hit"/>
+  		<collection property="dtos" javaType="List" ofType="NoticeFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORIGINALNAME" property="originalName"/>
+  		</collection>
+  		
+  	</resultMap>
+  	
+  	
+  	<select id="getTotal" resultType="Long">
+  		SELECT COUNT(NOTICENO) FROM NOTICE
+  		<include refid="searchSql"></include>
   	</select>
-  
-  	<insert id="setAdd" parameterType="NoticeDTO"> <!-- CRUD는 result타입이 없음 결과가 정수로옴 1,0 -->
-  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  	
+  	<insert id="setFileAdd" parameterType="NoticeFileDTO">
+  		INSERT INTO NOTICEFILE
+  		VALUES (NOTICEFILE_SEQ.NEXTVAL,#{noticeNo}, #{fileName}, #{originalName} )
+  	</insert>
+  	
+  	<insert id="setAdd" parameterType="NoticeDTO">
+  		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
   			SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
   		</selectKey>
-  		INSERT 
-  		INTO 
-  			NOTICE 
-  		VALUES 
-  			(
-  				#{num}, 
-  				#{subject}, 
-  				#{name}, 
-  				SYSDATE, 
-  				0, 
-  				#{contents}
+  		INSERT INTO	NOTICE 
+  		VALUES (#{num},	#{subject},	#{name},SYSDATE,0,#{contents}
   			)
   	</insert>
   	
-  	<select id="getDetail" resultMap="getDetailResult" parameterType="NoticeDTO">  
+  	<select id="getDetail" resultMap="getSelectResult" parameterType="NoticeDTO">  
   		SELECT 
-  			N.*,
-  			NF.* 
+  			* 
   		FROM
-  			NOTICE N LEFT OUTER JOIN
-  			NOTICEFILE NF ON N.NOTICENO = NF.NOTICENO
+  			NOTICE N
+  			LEFT JOIN
+  			NOTICEFILE NF
+  			ON N.NOTICENO=NF.NOTICENO
   		WHERE
   			N.NOTICENO=#{num}
   	</select>
   	
-  	<resultMap type="NoticeDTO" id="getDetailResult">
-  		<id column="NOTICENO" property="num"/>
-  		<result column="NOTICENAME" property="name"/>
-  		<result column="NOTICESUBJECT" property="subject"/>
-  		<result column="NOTICEDATE" property="createDate"/>
-  		<result column="NOTICEHIT" property="hit"/>
-  		<result column="NOTICECONTENTS" property="contents"/>
-
-  		<collection property="fileDTOs" javaType="java.util.List" ofType="NoticeFileDTO">
-  			<id column="FILENUM" property="fileNum"/>
-			<result column="FILENAME" property="fileName"/>
-			<result column="ORIGINALNAME" property="originalName"/>
-  			
-  		</collection>
-
-  	</resultMap>
-  	
-  	
-  	
-  	<delete id="setDelete"  parameterType="NoticeDTO">
+  	<delete id="setDelete" parameterType="NoticeDTO">
   		DELETE 
   			NOTICE 
   		WHERE 
@@ -126,15 +115,16 @@
 		SET
 			NOTICEHIT = NOTICEHIT + 1
 		WHERE
-			NOTICENO = #{num}
+			NOTICENO = #{noticeNo}
 	</update>
+	
+	<delete id="setFileDelete" parameterType="NoticeFileDTO">
+		DELETE NOTICEFILE WHERE FILENUM=#{fileNum}
+	</delete>
+	
+	<select id="getFileDetail" parameterType="NoticeFileDTO" resultType="NoticeFileDTO">
+		SELECT FILENUM, FILENAME FROM NOTICEFILE WHERE FILENUM=#{fileNum}
+	</select>
 
-	<insert id="setFileAdd" parameterType="NoticeFileDTO" > 
-  		INSERT INTO NOTICEFILE (FILENUM, NOTICENO, FILENAME, ORIGINALNAME)
-		VALUES (BANK_SEQ.NEXTVAL, #{noticeNo}, #{fileName}, #{originalName})
-  	</insert>
-	
-	
+
   </mapper>
-  
-  

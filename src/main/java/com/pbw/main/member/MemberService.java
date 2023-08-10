@@ -15,22 +15,24 @@ import com.pbw.main.util.FileManager;
 
 @Service
 public class MemberService {
-
+	
 	@Autowired
 	private MemberDAO memberDAO;
-	
 	@Autowired
-	private FileManager fileManager;	
+	private FileManager fileManager;
 	
-	public int setJoin(MemberDTO memberDTO, HttpSession session, MultipartFile multipartFile)throws Exception{
+	public MemberDTO getIdCheck(MemberDTO memberDTO)throws Exception{
+		return memberDAO.getIdCheck(memberDTO);
+	}
+	
+	public int setJoin(MemberDTO memberDTO, MultipartFile multipartFile, HttpSession session)throws Exception{
 		String path="/resources/upload/member/";
 		
 		int result = memberDAO.setJoin(memberDTO);
-		System.out.println("memberDTOsetJoin");
 		
 		if(!multipartFile.isEmpty()) {
-			
-			String fileName =  fileManager.fileSave(path, session, multipartFile);
+		
+			String fileName = fileManager.fileSave(path, session, multipartFile);
 			
 			MemberFileDTO memberFileDTO = new MemberFileDTO();
 			memberFileDTO.setId(memberDTO.getId());
@@ -38,20 +40,17 @@ public class MemberService {
 			memberFileDTO.setFileName(fileName);
 			result = memberDAO.setFileJoin(memberFileDTO);
 		}
-
-		return result; //memberDAO.setJoin(memberDTO);
+		
+		
+		
+		return result;//memberDAO.setJoin(memberDTO);
 	}
 	
 	public MemberDTO getLogin(MemberDTO memberDTO)throws Exception{
 		return memberDAO.getLogin(memberDTO);
 	}
-	
 	public int setMemberUpdate(MemberDTO memberDTO)throws Exception{
 		return memberDAO.setMemberUpdate(memberDTO);
-	}
-	
-	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
-		return memberDAO.setMemberDelete(memberDTO);
-	}
-	
+	}	
+
 }

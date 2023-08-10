@@ -73,7 +73,7 @@ public class QnaService implements BoardService{
 	}
 
 	public int setHitCount(BoardDTO boardDTO)throws Exception{
-		return qnaDAO.setHitCount(boardDTO);
+		return qnaDAO.setHitUpdate(boardDTO);
 	}
 	
 	//reply

@@ -15,63 +15,86 @@ import com.pbw.main.util.Pager;
 
 
 @Service
-public class NoticeService implements BoardService{
-
+public class NoticeService implements BoardService {
 	@Autowired
 	private NoticeDAO noticeDAO;
-	
 	@Autowired
 	private FileManager fileManager;
 	
+	public int setFileDelete(NoticeFileDTO noticeFileDTO, HttpSession session)throws Exception{
+		//폴더 파일 삭제
+		noticeFileDTO = noticeDAO.getFileDetail(noticeFileDTO);
+		boolean flag = fileManager.fileDelete(noticeFileDTO, "/resources/upload/notice/", session);
+		
+		if(flag) {
+			//db 삭제
+			return noticeDAO.setFileDelete(noticeFileDTO);
+		}
+		
+		return 0;
+	}
+
 	@Override
-	public List<BoardDTO> getList(Pager pager) throws Exception{
+	public List<BoardDTO> getList(Pager pager) throws Exception {
+		// TODO Auto-generated method stub
 		pager.makeRowNum();
-		Long total=noticeDAO.getTotal(pager);
-		pager.makePageNum(total);
+		pager.makePageNum(noticeDAO.getTotal(pager));
 		return noticeDAO.getList(pager);
 	}
-	
+
 	@Override
-	public int setAdd(BoardDTO boardDTO, MultipartFile [] files, HttpSession session)throws Exception {
+	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeDAO.getDetail(boardDTO);
+	}
+
+	@Override
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		String path="/resources/upload/notice/";
+		
 		int result = noticeDAO.setAdd(boardDTO);
 		
-		for(MultipartFile multipartFile: files) {
-			
-			if(multipartFile.isEmpty()) {
-				continue;				
+		for(MultipartFile file:files) {
+			if(!file.isEmpty()) {
+				String fileName=fileManager.fileSave(path, session, file);
+				
+				NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
+				noticeFileDTO.setNoticeNo(boardDTO.getNum());
+				noticeFileDTO.setFileName(fileName);
+				noticeFileDTO.setOriginalName(file.getOriginalFilename());
+				result=noticeDAO.setFileAdd(noticeFileDTO);
 			}
-			
-			String fileName = fileManager.fileSave(path, session, multipartFile);
-			NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
-			noticeFileDTO.setOriginalName(multipartFile.getOriginalFilename());
-			noticeFileDTO.setFileName(fileName);
-			noticeFileDTO.setNoticeNo(boardDTO.getNum());
-			result = noticeDAO.setFileAdd(noticeFileDTO);
-			
 		}
 		
 		
-		return result; //noticeDAO.setAdd(noticeDTO);
+		return result;
 	}
-	
+
 	@Override
-	public BoardDTO getDetail(BoardDTO boardDTO)throws Exception {
-		return noticeDAO.getDetail(boardDTO);
+	public int setUpdate(BoardDTO boardDTO, MultipartFile [] files, HttpSession session) throws Exception {
+		int result = noticeDAO.setUpdate(boardDTO);
+		// TODO Auto-generated method stub
+		String path="/resources/upload/notice/";
+		for(MultipartFile file:files) {
+			if(!file.isEmpty()) {
+				String fileName=fileManager.fileSave(path, session, file);
+				
+				NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
+				noticeFileDTO.setNoticeNo(boardDTO.getNum());
+				noticeFileDTO.setFileName(fileName);
+				noticeFileDTO.setOriginalName(file.getOriginalFilename());
+				result=noticeDAO.setFileAdd(noticeFileDTO);
+			}
+		}
+		return result;
 	}
-	
+
 	@Override
-	public int setDelete(BoardDTO boardDTO)throws Exception {
+	public int setDelete(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
 		return noticeDAO.setDelete(boardDTO);
 	}
 	
-	@Override
-	public int setUpdate(BoardDTO boardDTO)throws Exception{
-		return noticeDAO.setUpdate(boardDTO);
-	}
 	
-	public int setHitCount(NoticeDTO noticeDTO)throws Exception{
-		return noticeDAO.setHitCount(noticeDTO);
-	}
 
 }

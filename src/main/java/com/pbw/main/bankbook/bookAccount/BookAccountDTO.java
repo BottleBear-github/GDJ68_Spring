@@ -3,6 +3,7 @@ package com.pbw.main.bankbook.bookAccount;
 import java.sql.Date;
 
 public class BookAccountDTO {
+	
 	private Long accountNum;
 	private String id;
 	private Long bookNum;
@@ -35,6 +36,7 @@ public class BookAccountDTO {
 	public void setAccount(Long account) {
 		this.account = account;
 	}
+
 	public String getAccountPassword() {
 		return accountPassword;
 	}
@@ -42,7 +44,9 @@ public class BookAccountDTO {
 		this.accountPassword = accountPassword;
 	}
 	public Long getAccountBalance() {
-		
+		if(this.accountBalance==null) {
+			this.accountBalance=0L;
+		}
 		return accountBalance;
 	}
 	public void setAccountBalance(Long accountBalance) {
@@ -56,4 +60,5 @@ public class BookAccountDTO {
 	}
 	
 	
+
 }

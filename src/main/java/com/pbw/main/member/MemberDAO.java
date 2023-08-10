@@ -9,11 +9,18 @@ public class MemberDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	private final String NAMESPACE="com.iu.main.member.MemberDAO.";
 	
-	private final String NAMESPACE="com.pbw.main.member.MemberDAO.";
+	public MemberDTO getIdCheck(MemberDTO memberDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getIdCheck", memberDTO);
+	}
 	
 	public int setFileJoin(MemberFileDTO memberFileDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setFileJoin", memberFileDTO);
+	}
+	
+	public int setJoin(MemberDTO memberDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
 	}
 	
 	public MemberDTO getLogin(MemberDTO memberDTO)throws Exception{
@@ -23,12 +30,5 @@ public class MemberDAO {
 	public int setMemberUpdate(MemberDTO memberDTO)throws Exception{
 		return sqlSession.update(NAMESPACE+"setMemberUpdate", memberDTO);
 	}
-	
-	public int setJoin(MemberDTO memberDTO)throws Exception{
-		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
-	}
-	
-	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
-		return sqlSession.delete(NAMESPACE+"setMemberDelete", memberDTO);
-	}
+
 }

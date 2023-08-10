@@ -32,5 +32,60 @@
 		<a class=btn-primary href="./memberDelete">회원탈퇴</a>
 	</section>
 
+	<script>
+
+/* 	const productList = document.getElementById("productList");
+	
+	getList(1);
+
+
+	productList.addEventListener("click", function(event){
+		if(event.target.classList.contains("move")){
+			let page = event.target.getAttribute("data-num");
+			console.log("before")
+			getList(page);
+		}
+	})
+	
+	
+	function getList(page){
+		fetch("../bookAccount/list?page="+page, {
+			method:"get"
+		})
+		.then( (response)=> {return response.text()} )
+		.then( (r) => {
+			console.log("ajax 실행")
+			productList.innerHTML=r;
+			console.log("after");
+			
+		} );
+		;
+
+	} */
+
+		$("#productList").on("click", ".move", function(){
+			let p = $(this).attr("data-num")
+			getList(p);
+		})
+		
+		getList(1);
+		function getList(page){
+			$.ajax({
+				type:'get',
+				url:'../bookAccount/list',
+				data:{
+					page:page
+				},
+				success:function(response){
+					$("#productList").html(response.trim());
+				},
+				error:function(){
+					alert("관리자에게문의")
+				}
+			})
+		}
+
+	</script>
+
 </body>
 </html>
