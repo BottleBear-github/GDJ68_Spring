@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,8 +32,22 @@ public class NoticeController {
 		return "notice";
 	}
 	
+	@PostMapping("setContentsImg")
+	public String setContentsImgDelete(String path, HttpSession session, Model model) throws Exception{
+		boolean check = noticeService.setContentsImgDelete(path, session);
+		model.addAttribute("result", check);
+		return "commons/ajaxResult";
+	}
+	
+	@PostMapping("setContentsImg")
+	public String setContentsImg(MultipartFile files, HttpSession session, Model model)throws Exception{
+		String path = noticeService.setContentsImg(files, session);
+		model.addAttribute("result", path);
+		return "commons/ajaxResult";
+	}
+	
 	@GetMapping("fileDelete")
-	public String setFileDelete(NoticeFileDTO noticeFileDTO, HttpSession session ,Model model)throws Exception{
+	public String setFileDelete(NoticeFileDTO noticeFileDTO, HttpSession session , Model model)throws Exception{
 		int result = noticeService.setFileDelete(noticeFileDTO, session);
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";

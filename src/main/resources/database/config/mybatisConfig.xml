@@ -19,5 +19,7 @@
  		<typeAlias type="com.pbw.main.board.qna.QnaFileDTO" alias="QnaFileDTO"/>
  		<typeAlias type="com.pbw.main.board.BoardDTO" alias="BoardDTO"/>
  		<typeAlias type="com.pbw.main.bankbook.bookAccount.BookAccountDTO" alias="BookAccountDTO"/>
+ 		<typeAlias type="com.pbw.main.util.Pager" alias="Pager"/>
+ 		<typeAlias type="com.pbw.main.bankbook.comment.CommentDTO" alias="CommentDTO"/>
  	</typeAliases>
  </configuration>

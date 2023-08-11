@@ -7,17 +7,17 @@ import com.pbw.main.board.BoardDTO;
 
 public class NoticeDTO extends BoardDTO {
 
-	private List<NoticeFileDTO> fileDTOs;
+	private List<NoticeFileDTO> dtos;
 
-	public List<NoticeFileDTO> getFileDTOs() {
-		return fileDTOs;
+	public List<NoticeFileDTO> getDtos() {
+		return dtos;
 	}
 
-	public void setFileDTOs(List<NoticeFileDTO> fileDTOs) {
-		this.fileDTOs = fileDTOs;
+	public void setDtos(List<NoticeFileDTO> dtos) {
+		this.dtos = dtos;
 	}
-	
-	
+
+
 	
 
 	

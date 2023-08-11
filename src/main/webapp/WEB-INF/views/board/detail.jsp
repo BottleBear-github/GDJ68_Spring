@@ -43,7 +43,7 @@
 		</table>
 		
 		<div>
-			<c:forEach items="${dto.fileDTOs}" var="f">
+			<c:forEach items="${dto.dtos}" var="f">
 				<img src="../resources/upload/${board}/${f.fileName}">
 			</c:forEach>
 		</div>

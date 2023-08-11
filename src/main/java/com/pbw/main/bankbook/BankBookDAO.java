@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pbw.main.bankbook.comment.CommentDTO;
 import com.pbw.main.util.Pager;
 
 
@@ -21,6 +22,20 @@ public class BankBookDAO {
 	
 	private final String NAMESPACE="com.pbw.main.bankbook.BankBookDAO.";  //이 mapper에서 라는 뜻
 	
+	//-----comment
+	public long getCommentTotal(CommentDTO commentDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCommentTotal", commentDTO);
+	}
+	
+	public List<CommentDTO> getCommentList(Map<String, Object> map)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getCommentList", map);
+	}
+	
+	public int setCommentAdd(CommentDTO commentDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCommentAdd", commentDTO);
+	}
+	
+	//------bankbook
 	//total
 	public Long getTotal(Pager pager)throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);

@@ -2,6 +2,8 @@ let del = document.getElementById("del");
 const c1 = document.getElementsByClassName("c1");
 const frm = document.getElementById("frm");
 
+let temp="hello";
+
 for(c of c1){
     c.addEventListener("click", function(){
         let url=this.getAttribute("data-url");

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pbw.main.bankbook.comment.CommentDTO;
 import com.pbw.main.member.MemberFileDTO;
 import com.pbw.main.util.FileManager;
 import com.pbw.main.util.Pager;
@@ -21,7 +22,23 @@ public class BankBookService {
 	private BankBookDAO bankBookDAO;
 	@Autowired
 	private FileManager fileManager;
+	//---------comment
+	public List<CommentDTO> getCommentList(Pager pager, CommentDTO commentDTO)throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		pager.makeRowNum();
+		pager.makePageNum(bankBookDAO.getCommentTotal(commentDTO));
+		map.put("pager", pager);
+		map.put("comment", commentDTO);
+		
+		return bankBookDAO.getCommentList(map);
+	}
 	
+	public int setCommentAdd(CommentDTO commentDTO)throws Exception{
+		return bankBookDAO.setCommentAdd(commentDTO);
+	}
+	
+	
+	//-------bankbook
 	public BankBookDTO getDetail(BankBookDTO bankBookDTO)throws Exception {
 		return bankBookDAO.getDetail(bankBookDTO);
 	}

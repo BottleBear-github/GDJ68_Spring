@@ -9,8 +9,9 @@
 	<title>Insert title here</title>
 
 	<c:import url="../temp/bootStrap.jsp"></c:import>
-
-
+	    <!-- include summernote css/js-->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
@@ -61,6 +62,54 @@
 		const btn = document.getElementById("btn");
 		const subject = document.getElementById("subject");
 		const frm = document.getElementById("frm");
+		
+		$("#contents").summernote({
+			placeholder: '내용 입력',
+	        tabsize: 2,
+	        height: 100,
+	        callbacks: {
+	            onImageUpload: function(files) {
+	           		alert('이미지 첨부');
+	              	//이미지를 server로 전송하고
+	              	//응답으로 이미지 경로와 파일명을 받아서
+	              	//img 태그를 만들어서 src속성에 이미지경로를 넣는것
+					let formData = new FormData(); // <form></form>이 만들어짐
+					formData.append("files", files[0]);//<input type="file" name="files">
+
+					$.ajax({
+						type:'post',
+						url:'setContentsImg',
+						data:formData,
+						enctype:'mulipart/form-data',
+						cache:false,
+						contenstType:false,
+						processData:false,
+						success:function(result){
+							$("#contents").summernote('insertNode', result.trim());
+						},
+						error:function(){
+							console.log('error');
+						}
+					});
+	            },
+				onMediaDelete:function(files){
+					let path = $(files[0]).attr("src");  
+
+					$.ajax({
+						type:'post',
+						url:'./setContentsImgDelete',
+						path:path,
+						success:function(result){
+							console.log(result);
+
+						},
+						error:function(){
+							console.log('error');
+						}
+					})
+				}
+			}
+		})
 
 		btn.addEventListener("click", function(){
 			console.log(subject.value=="");

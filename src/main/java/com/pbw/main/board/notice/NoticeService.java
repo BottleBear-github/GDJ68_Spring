@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pbw.main.board.BoardDTO;
 import com.pbw.main.board.BoardService;
+import com.pbw.main.file.FileDTO;
 import com.pbw.main.util.FileManager;
 import com.pbw.main.util.Pager;
 
@@ -20,6 +21,20 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private FileManager fileManager;
+	
+	public boolean setContentsImgDelete(String path, HttpSession session) throws Exception{
+		FileDTO fileDTO = new FileDTO();
+		fileDTO.setFileName(path.substring(path.lastIndexOf("/")+1));
+		path = path.substring(0, path.lastIndexOf("/")+1);
+		return fileManager.fileDelete(fileDTO, path, session);
+	}
+	
+	public String setContentsImg(MultipartFile files, HttpSession session)throws Exception{
+		String path="/resources/upload/notice/";
+		String fileName = fileManager.fileSave(path, session, files);
+		return path+fileName;
+		
+	}
 	
 	public int setFileDelete(NoticeFileDTO noticeFileDTO, HttpSession session)throws Exception{
 		//폴더 파일 삭제
